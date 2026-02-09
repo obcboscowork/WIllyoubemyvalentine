@@ -1,57 +1,67 @@
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
-const question = document.getElementById("question");
-const image = document.getElementById("main-image");
 const message = document.getElementById("message");
+const cat = document.getElementById("cat");
+const music = document.getElementById("bgMusic");
+const countdown = document.getElementById("countdown");
 
-/* YES CLICK */
+// NO button runs away
+noBtn.addEventListener("mouseover", () => {
+  noBtn.style.transform =
+    `translate(${Math.random()*200-100}px, ${Math.random()*200-100}px)`;
+});
+
+// YES clicked
 yesBtn.addEventListener("click", () => {
-
-  flashRainbow();
-
-  question.innerText = "Yayyyy!! 💘💘💘";
-  message.innerText = "I knew you'd say YES 😘";
-
-  image.src = "cat-heart.gif";
-
-  yesBtn.style.display = "none";
-  noBtn.style.display = "none";
-
+  message.innerHTML = "Yayyy! I knew you'd say yes! 💖🥰";
+  cat.src = "./cat-heart.gif";
+  music.play();
+  launchConfetti();
+  launchHearts();
+  fireworks();
 });
 
-/* NO CLICK */
-noBtn.addEventListener("click", () => {
-
-  noBtn.innerText = "You sure? 😏";
-
-  let currentSize = window.getComputedStyle(yesBtn).fontSize;
-  let newSize = parseFloat(currentSize) * 1.3;
-  yesBtn.style.fontSize = newSize + "px";
-
-  moveNoButton();
-
-});
-
-/* Move No Button */
-function moveNoButton(){
-  const x = Math.random() * 200 - 100;
-  const y = Math.random() * 200 - 100;
-
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+// CONFETTI
+function launchConfetti(){
+  for(let i=0;i<150;i++){
+    const c = document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.backgroundColor=`hsl(${Math.random()*360},100%,70%)`;
+    c.style.animationDuration=Math.random()*3+2+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),5000);
+  }
 }
 
-/* Rainbow Flash */
-function flashRainbow(){
-  const colors = ["#ff0000","#ff7f00","#ffff00","#00ff00","#0000ff","#4b0082","#9400d3"];
-  let i = 0;
-
-  const interval = setInterval(() => {
-    document.body.style.background = colors[i];
-    i = (i + 1) % colors.length;
-  }, 150);
-
-  setTimeout(() => {
-    clearInterval(interval);
-    document.body.style.background = "linear-gradient(120deg,#ffafbd,#ffc3a0)";
-  }, 1500);
+// HEARTS
+function launchHearts(){
+  for(let i=0;i<50;i++){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=Math.random()*3+2+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+  }
 }
+
+// FIREWORKS
+function fireworks(){
+  launchConfetti();
+  setTimeout(launchConfetti,400);
+  setTimeout(launchConfetti,800);
+}
+
+// COUNTDOWN
+setInterval(()=>{
+  const target = new Date("Feb 14, 2026 00:00:00");
+  const now = new Date();
+  const diff = target - now;
+
+  if(diff > 0){
+    const days = Math.floor(diff / 86400000);
+    countdown.innerHTML = `Valentine's Day in ${days} days 💘`;
+  }
+},1000);
+
