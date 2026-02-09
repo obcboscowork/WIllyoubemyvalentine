@@ -1,41 +1,38 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Valentine's Choice</title>
-<link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8">
+  <title>Suman Will You Be My Valentine?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- JS -->
+  <script src="./script.js" defer></script>
 </head>
 
 <body>
 
-<audio id="bgMusic" loop>
-  <source src="./music.mp3" type="audio/mpeg">
-</audio>
+  <div class="container">
 
-<div class="container">
+    <h1 id="question"> Suman Will you be my Valentine? 💖</h1>
 
-<h1> Suman will you be my Valentine?(try clicking no) ❤️</h1>
+    <div id="image-container">
+      <img id="main-image" src="cat.gif" alt="Cute Cat">
+    </div>
 
-<img id="cat" src="./cat.gif.png" alt="Cute Cat">
+    <div class="buttons">
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
+    </div>
 
-<div class="buttons">
-  <button id="yesBtn">Yes</button>
-  <button id="noBtn">No</button>
-</div>
+    <p id="message"></p>
 
-<p id="message"></p>
-
-<p id="countdown"></p>
-
-</div>
-
-<script src="script.js" defer></script>
-
+  </div>
 
 </body>
 </html>
-
-
-
-
