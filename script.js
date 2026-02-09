@@ -1,79 +1,57 @@
-body{
-  background: linear-gradient(120deg,#ffafbd,#ffc3a0);
-  font-family: 'Sacramento', cursive;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  margin:0;
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const question = document.getElementById("question");
+const image = document.getElementById("main-image");
+const message = document.getElementById("message");
+
+/* YES CLICK */
+yesBtn.addEventListener("click", () => {
+
+  flashRainbow();
+
+  question.innerText = "Yayyyy!! 💘💘💘";
+  message.innerText = "I knew you'd say YES 😘";
+
+  image.src = "cat-heart.gif";
+
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+
+});
+
+/* NO CLICK */
+noBtn.addEventListener("click", () => {
+
+  noBtn.innerText = "You sure? 😏";
+
+  let currentSize = window.getComputedStyle(yesBtn).fontSize;
+  let newSize = parseFloat(currentSize) * 1.3;
+  yesBtn.style.fontSize = newSize + "px";
+
+  moveNoButton();
+
+});
+
+/* Move No Button */
+function moveNoButton(){
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 200 - 100;
+
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
-/* Card */
-.container{
-  background:white;
-  padding:40px;
-  border-radius:25px;
-  text-align:center;
-  width:340px;
-  box-shadow:0 0 20px pink;
-  animation:fadeIn 1.5s ease;
-}
+/* Rainbow Flash */
+function flashRainbow(){
+  const colors = ["#ff0000","#ff7f00","#ffff00","#00ff00","#0000ff","#4b0082","#9400d3"];
+  let i = 0;
 
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(30px);}
-  to{opacity:1; transform:translateY(0);}
-}
+  const interval = setInterval(() => {
+    document.body.style.background = colors[i];
+    i = (i + 1) % colors.length;
+  }, 150);
 
-h1{
-  font-size:42px;
-  color:#ff477e;
-}
-
-img{
-  width:220px;
-  margin:20px 0;
-}
-
-/* Buttons */
-.buttons{
-  display:flex;
-  justify-content:space-around;
-}
-
-button{
-  padding:12px 26px;
-  font-size:22px;
-  border:none;
-  border-radius:12px;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-#yesBtn{
-  background:#38b000;
-  color:white;
-}
-
-#noBtn{
-  background:#ff4d6d;
-  color:white;
-  position:relative;
-}
-
-button:hover{
-  transform:scale(1.15);
-}
-
-/* Message */
-#message{
-  margin-top:20px;
-  font-size:28px;
-  color:#ff477e;
-}
-
-/* Mobile */
-@media(max-width:480px){
-  .container{width:90%;}
-  h1{font-size:32px;}
-  button{font-size:18px;}
+  setTimeout(() => {
+    clearInterval(interval);
+    document.body.style.background = "linear-gradient(120deg,#ffafbd,#ffc3a0)";
+  }, 1500);
 }
